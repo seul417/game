@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>가위바위보 게임</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #333;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>가위바위보 게임</h1>
+    <p>가위, 바위, 보 중 하나를 선택하세요:</p>
+    <button class="btn" onclick="playGame('가위')">가위</button>
+    <button class="btn" onclick="playGame('바위')">바위</button>
+    <button class="btn" onclick="playGame('보')">보</button>
+    <p>누적 점수: <span id="score">0</span></p>
+    <p id="result"></p>
+
+    <script>
+        let score = 0;
+
+        function playGame(playerChoice) {
+            const choices = ["가위", "바위", "보"];
+            const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+            const result = getResult(playerChoice, computerChoice);
+
+            if (result === "당신이 이겼습니다!") {
+                score += 10;
+                document.getElementById("score").innerHTML = score;
+            }
+
+            document.getElementById("result").innerHTML = `당신은 ${playerChoice}를 선택했습니다. 컴퓨터는 ${computerChoice}를 선택했습니다. ${result}`;
+        }
+
+        function getResult(player, computer) {
+            if (player === computer) {
+                return "무승부입니다!";
+            } else if (
+                (player === "가위" && computer === "보") ||
+                (player === "바위" && computer === "가위") ||
+                (player === "보" && computer === "바위")
+            ) {
+                return "당신이 이겼습니다!";
+            } else {
+                return "컴퓨터가 이겼습니다!";
+            }
+        }
+    </script>
+</body>
+</html>
